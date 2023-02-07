@@ -1,7 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+const { hashPassword } = require("../helpers/hashAndValidatePassword");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,14 +12,59 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    statusMember: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+
+  User.init(
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Name is required",
+          },
+          notNull: {
+            msg: "Name is required",
+          },
+        },
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          msg: "Email already exists",
+        },
+        validate: {
+          notEmpty: {
+            msg: "Email is required",
+          },
+          notNull: {
+            msg: "Email is required",
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Password is required",
+          },
+          notNull: {
+            msg: "Password is required",
+          },
+        },
+      },
+      statusMember: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "User",
+      hooks: {
+        beforeCreate: (user, options) => {
+          user.password = hashPassword(user.password);
+        },
+      },
+    }
+  );
   return User;
 };
