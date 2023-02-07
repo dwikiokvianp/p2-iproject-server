@@ -1,7 +1,7 @@
-const { User } = require("../models");
+const { User } = require("../../models");
 
-const { generateToken } = require("../helpers/token");
-const { validatePassword } = require("../helpers/hashAndValidatePassword");
+const { generateToken } = require("../../helpers/token");
+const { validatePassword } = require("../../helpers/hashAndValidatePassword");
 
 class UserController {
   static async userLogin(req, res, next) {

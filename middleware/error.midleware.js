@@ -27,6 +27,14 @@ const errorMiddleware = (err, req, res, next) => {
       message = "Invalid email or password";
       code = 400;
       break;
+    case "Unauthorized":
+      message = "You are not authorized";
+      code = 401;
+      break;
+    case "ContentNotFound":
+      message = "Content not found";
+      code = 404;
+      break;
   }
 
   res.status(code).json({ message });
