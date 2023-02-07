@@ -35,6 +35,13 @@ const errorMiddleware = (err, req, res, next) => {
       message = "Content not found";
       code = 404;
       break;
+    case "UserNotFound":
+      message = "User not found";
+      code = 404;
+      break;
+    case "AlreadyFollowed":
+      message = "You already followed this user";
+      code = 400;
   }
 
   res.status(code).json({ message });
