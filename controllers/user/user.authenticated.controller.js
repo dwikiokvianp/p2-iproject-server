@@ -5,7 +5,9 @@ class UserAuthenticatedController {
     try {
       const { targetId } = req.params;
       const { id } = req.user;
-      console.log("tertriger");
+
+      if (+targetId === id) throw { name: "CannotFollowYourself" };
+
       const user = await User.findByPk(id);
       if (!user) throw { name: "UserNotFound" };
       const targetUser = await User.findByPk(targetId);

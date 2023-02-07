@@ -42,6 +42,11 @@ const errorMiddleware = (err, req, res, next) => {
     case "AlreadyFollowed":
       message = "You already followed this user";
       code = 400;
+      break;
+    case "CannotFollowYourself":
+      message = "You cannot follow yourself";
+      code = 400;
+      break;
   }
 
   res.status(code).json({ message });
