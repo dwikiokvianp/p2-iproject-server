@@ -9,7 +9,7 @@ class ContentPublicController {
           attributes: ["name"],
         },{
           model: User,
-          attributes: ["name"],
+          attributes: ["name", "job"],
         }],
         where: {
           contentType: "public",

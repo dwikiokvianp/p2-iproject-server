@@ -51,6 +51,10 @@ const errorMiddleware = (err, req, res, next) => {
       message = "You cannot follow yourself";
       code = 400;
       break;
+    case "AlreadyPremium":
+      message = "You already premium member";
+      code = 400;
+      break;
   }
 
   res.status(code).json({ message });
