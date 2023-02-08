@@ -7,6 +7,7 @@ class UserController {
   static async userLogin(req, res, next) {
     try {
       const { email, password } = req.body;
+      console.log(req.body, "<<< req.body");
       if (!email) throw { name: "EmailIsEmpty" };
       if (!password) throw { name: "PasswordIsEmpty" };
 
@@ -30,15 +31,17 @@ class UserController {
 
   static async userRegister(req, res, next) {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, job } = req.body;
       if (!name) throw { name: "NameIsEmpty" };
       if (!email) throw { name: "EmailIsEmpty" };
       if (!password) throw { name: "PasswordIsEmpty" };
+      if (!job) throw { name: "JobIsEmpty" };
 
       const user = await User.create({
         name,
         email,
         password,
+        job,
         statusMember: "regular",
       });
       res.status(201).json(user);

@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      hotline: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       contentFill: {
         type: Sequelize.TEXT,
         allowNull: false,

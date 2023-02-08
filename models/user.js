@@ -57,6 +57,18 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      job: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Job is required",
+          },
+          notNull: {
+            msg: "Job is required",
+          },
+        },
+      },
       statusMember: DataTypes.STRING,
     },
     {

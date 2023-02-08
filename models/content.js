@@ -40,6 +40,18 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      hotline: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Hotline is required",
+          },
+          notNull: {
+            msg: "Hotline is required",
+          },
+        },
+      },
       contentType: {
         type: DataTypes.STRING,
         allowNull: false,

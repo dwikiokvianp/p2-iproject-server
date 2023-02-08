@@ -1,13 +1,16 @@
-const { Content, Topic } = require("../../models");
+const { Content, Topic, User } = require("../../models");
 
 class ContentPublicController {
   static async getAllContent(req, res, next) {
     try {
       const contents = await Content.findAll({
-        include: {
-          model: Topic,
+        include: [{
+          model: Topic, 
           attributes: ["name"],
-        },
+        },{
+          model: User,
+          attributes: ["name"],
+        }],
         where: {
           contentType: "public",
         },

@@ -23,6 +23,10 @@ const errorMiddleware = (err, req, res, next) => {
       message = "Name is required";
       code = 400;
       break;
+    case "JobIsEmpty":
+      message = "Job is required";
+      code = 400;
+      break;
     case "InvalidCredentials":
       message = "Invalid email or password";
       code = 400;
