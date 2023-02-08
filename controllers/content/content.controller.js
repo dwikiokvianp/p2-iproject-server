@@ -4,11 +4,12 @@ class ContentController {
   static async postContent(req, res, next) {
     try {
       const UserId = req.user.id;
-      const { title, contentFill, contentType, TopicId } = req.body;
+      const { title, contentFill, contentType, TopicId, hotline } = req.body;
       await Content.create({
         title,
         contentFill,
         contentType,
+        hotline,
         TopicId,
         UserId,
       });
