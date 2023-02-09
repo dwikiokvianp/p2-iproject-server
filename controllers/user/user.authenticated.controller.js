@@ -107,6 +107,48 @@ class UserAuthenticatedController {
       next(err);
     }
   }
+
+  static async getFollowers(req, res, next) {
+    try {
+      const { id } = req.user;
+      const followers = await Follower.findAll({
+        where: {
+          TargetId: id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: ["name", "email", "job"],
+          },
+        ],
+      });
+
+      res.status(200).json(followers);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async getFollowing(req, res, next) {
+    try {
+      const { id } = req.user;
+      const followers = await Follower.findAll({
+        where: {
+          UserId: id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: ["name", "email", "job"],
+          },
+        ],
+      });
+
+      res.status(200).json(followers);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = UserAuthenticatedController;

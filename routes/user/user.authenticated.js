@@ -9,6 +9,17 @@ userAuthenticatedRoutes.patch(
   "/status",
   userAuthenticatedController.updateStatusMember
 );
+
+userAuthenticatedRoutes.get(
+  "/followers",
+  userAuthenticatedController.getFollowers
+);
+
+userAuthenticatedRoutes.get(
+  "/following",
+  userAuthenticatedController.getFollowing
+);
+
 userAuthenticatedRoutes.post(
   "/:targetId",
   userAuthenticatedController.followOtherUser
