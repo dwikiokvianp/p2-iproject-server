@@ -7,7 +7,7 @@ const indexRoutes = require("./routes/index.routes");
 const errorMiddleware = require("./middleware/error.midleware");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
