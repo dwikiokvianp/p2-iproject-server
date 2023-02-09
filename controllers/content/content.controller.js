@@ -1,20 +1,46 @@
 const { Content, UserContent } = require("../../models");
 
 class ContentController {
+
+  static async getAllContent(req, res, next) {
+    try {
+      const contents = await Content.findAll({
+        include: [
+          {
+            model: Topic,
+            attributes: ["name"],
+          },
+          {
+            model: User,
+            attributes: ["name", "job"],
+          },
+        ],
+        where: {
+        },
+      });
+      res.status(200).json(contents);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   static async postContent(req, res, next) {
     try {
       const UserId = req.user.id;
-      const { title, contentFill, contentType, TopicId, hotline } = req.body;
+      const { title, contentFill, type, topic, hotline } = req.body;
+      console.log(req.body)
       await Content.create({
         title,
         contentFill,
-        contentType,
+        contentType: type,
         hotline,
-        TopicId,
+        TopicId: topic,
         UserId,
       });
       res.status(201).json({ message: "Content successfully created" });
     } catch (err) {
+      console.log(err)
       res.send(err);
     }
   }
@@ -44,6 +70,7 @@ class ContentController {
       next(err);
     }
   }
+  
 }
 
 module.exports = ContentController;

@@ -3,6 +3,17 @@ const { Content, Topic, User } = require("../../models");
 const axios = require("axios").default;
 
 class ContentPublicController {
+
+  static async getAllTopics(req, res, next) {
+    try {
+      console.log('masuk')
+      const data = await Topic.findAll({atributes: ['name']})
+      res.status(200).json(data)
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async getContentById(req, res, next) {
     try {
       const { id } = req.params;

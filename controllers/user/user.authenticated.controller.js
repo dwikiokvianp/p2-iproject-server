@@ -1,5 +1,7 @@
 const { User, Follower } = require("../../models");
 
+const NewsAPI = require("newsapi");
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 const midtransClient = require("midtrans-client");
 
 const randomize = require("../../helpers/randomize");
@@ -55,7 +57,7 @@ class UserAuthenticatedController {
   static async payment(req, res, next) {
     try {
       const id = req.user.id;
-      console.log("terpanggil")
+      console.log("terpanggil");
       const user = await User.findByPk(id);
       if (!user) throw { name: "UserNotFound" };
       const { statusMember } = user;
@@ -84,6 +86,22 @@ class UserAuthenticatedController {
         })
         .catch((err) => {
           res.send(err);
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async premium(req, res, next) {
+    try {
+      newsapi.v2
+        .topHeadlines({
+          country: "us",
+          category: "business",
+          language: "en",
+        })
+        .then((response) => {
+          res.status(200).json(response);
         });
     } catch (err) {
       next(err);

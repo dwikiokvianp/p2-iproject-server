@@ -7,6 +7,7 @@ contentPublicRoutes.post(
   "/summarize/:id",
   ContentController.summarizeParagraph
 );
+contentPublicRoutes.get("/topics", ContentController.getAllTopics);
 contentPublicRoutes.get("/:id", ContentController.getContentById);
 
 module.exports = contentPublicRoutes;

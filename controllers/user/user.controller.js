@@ -20,6 +20,7 @@ class UserController {
       const payload = {
         id: user.id,
         email: user.email,
+        statusMember: user.statusMember,
       };
 
       const access_token = generateToken(payload);
@@ -44,7 +45,12 @@ class UserController {
         job,
         statusMember: "regular",
       });
-      res.status(201).json(user);
+      const payload = {
+        id: user.id,
+        email: user.email,
+        statusMember: user.statusMember,
+      }
+      res.status(201).json(payload);
     } catch (error) {
       next(error);
     }
